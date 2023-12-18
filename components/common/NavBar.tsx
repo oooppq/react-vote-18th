@@ -7,11 +7,8 @@ const NavBar = () => {
       <button className="flex-auto">
         <CeosLogo className="w-[172px] h-[73px]" />
       </button>
-      <NavButton buttonStyle="mr-2.5 border border-indigo-900" title="로그인" />
-      <NavButton
-        buttonStyle="mr-2.5 bg-[#384084] text-white"
-        title="회원가입"
-      />
+      <NavButton buttonStyle="mr-2.5 border border-ceos-1" title="로그인" />
+      <NavButton buttonStyle="mr-2.5 bg-ceos-1 text-white" title="회원가입" />
     </div>
   );
 };
