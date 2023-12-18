@@ -13,7 +13,7 @@ const NavButton = ({
 }: NavButtonProps) => {
   return (
     <button
-      className={`${buttonStyle} rounded-[20px] h-[44px] text-xl px-5 py-2.5 box-border justify-center items-center inline-flex`}
+      className={`${buttonStyle} rounded-[20px] text-xs sm:text-xl px-5 py-2.5 box-border justify-center items-center inline-flex`}
       onClick={handleClickButton}
     >
       {title}
