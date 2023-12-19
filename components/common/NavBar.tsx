@@ -3,12 +3,12 @@ import Image from 'next/image';
 
 const NavBar = () => {
   return (
-    <div className="flex mx-3 mt-3 sm:mx-10 sm:mt-10 items-center">
+    <div className="flex mx-3 mt-3 md:mx-10 md:mt-10 items-center">
       <button className="flex-auto">
         <Image
           src="/ceos-logo.png"
           fill
-          className="!relative !w-[100px] sm:!w-[172px]"
+          className="!relative !w-[100px] md:!w-[172px]"
           alt="ceos logo"
         />
       </button>
