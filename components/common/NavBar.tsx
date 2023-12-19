@@ -2,10 +2,14 @@
 
 import NavButton from '@/components/common/NavButton';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const NavBar = () => {
   const router = useRouter();
+  const pathname = usePathname();
+
+  if (pathname === '/login' || pathname === '/join') return null;
+
   return (
     <div className="flex mx-3 mt-3 h-[44px] md:mx-10 md:mt-10 md:h-[73px] items-center">
       <button
