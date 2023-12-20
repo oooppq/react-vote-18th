@@ -1,6 +1,12 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import NavBar from '@/components/common/NavBar';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  maximumScale: 1,
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: 'Sniff Vote',
