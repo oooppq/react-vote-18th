@@ -1,8 +1,11 @@
 'use client';
 
 import AuthInput from '@/components/auth/AuthInput';
+import { useRouter } from 'next/navigation';
 
-const page = () => {
+const Login = () => {
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -12,13 +15,14 @@ const page = () => {
     };
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const res = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
-
-      console.log(response);
-    } catch (e) {}
+      if (res.ok) {
+        router.push('/');
+      }
+    } catch {}
   };
 
   return (
@@ -44,4 +48,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;
