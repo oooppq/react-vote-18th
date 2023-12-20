@@ -3,7 +3,7 @@ import AuthStatusMessage from '@/components/auth/AuthStatusMessage';
 
 const page = () => {
   return (
-    <div className="bg-ceos-3 w-full h-full flex flex-col items-center">
+    <div className="bg-ceos-3 w-full h-full flex flex-col items-center pt-[10%] md:pt-[77px]">
       <div className="text-white font-bold text-4xl my-6">회원가입</div>
       <form
         action=""
