@@ -9,19 +9,19 @@ const page = () => {
         action=""
         className="flex flex-col w-[90%] max-w-[790px] items-center px-[10%] pt-12 pb-6 bg-white rounded-[10px]"
       >
-        <AuthInput placeHolder="이름" />
+        <AuthInput placeHolder="이름" inputName="name" />
         {/* <AuthStatusMessage /> */}
-        <AuthInput placeHolder="아이디" />
+        <AuthInput placeHolder="아이디" inputName="id" />
         {/* <AuthStatusMessage /> */}
-        <AuthInput placeHolder="비밀번호" />
+        <AuthInput placeHolder="비밀번호" inputName="password" />
         {/* <AuthStatusMessage /> */}
-        <AuthInput placeHolder="비밀번호 확인" />
+        <AuthInput placeHolder="비밀번호 확인" inputName="passwordCheck" />
         {/* <AuthStatusMessage /> */}
-        <AuthInput placeHolder="이메일 주소" />
+        <AuthInput placeHolder="이메일 주소" inputName="email" />
         {/* <AuthStatusMessage /> */}
         <button
           type="submit"
-          className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-8"
+          className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-8 font-bold"
         >
           가입하기
         </button>
