@@ -1,3 +1,4 @@
+import { TUserInfo } from '@/types';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -16,7 +17,7 @@ export async function GET() {
       }
     );
   }
-  const userInfo = JSON.parse(stored.value);
+  const userInfo: TUserInfo = JSON.parse(stored.value);
 
   return NextResponse.json(userInfo);
 }

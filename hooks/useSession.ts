@@ -1,7 +1,10 @@
+import { TUserInfo } from '@/types';
 import { useEffect, useState } from 'react';
 
 export const useSession = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<TUserInfo | null | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     (async () => {

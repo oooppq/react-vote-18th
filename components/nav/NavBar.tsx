@@ -4,12 +4,13 @@ import NavButton from '@/components/nav/NavButton';
 import { useSession } from '@/hooks/useSession';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import { TUserInfo } from '@/types';
 
 const NavBar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const userInfo = useSession();
-  console.log(userInfo);
+  const userInfo: TUserInfo | null | undefined = useSession();
+
   if (pathname === '/login' || pathname === '/join') return null;
 
   return (
