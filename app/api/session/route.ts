@@ -8,16 +8,12 @@ export async function GET() {
   const cookieStore = cookies();
   const stored = cookieStore.get('user_info');
   if (!stored) {
-    return NextResponse.json(
-      {
-        message: 'Unauthorized',
-      },
-      {
-        status: 401,
-      }
-    );
+    return NextResponse.json(null);
   }
   const userInfo: TUserInfo = JSON.parse(stored.value);
-
+  if (userInfo.expTime < new Date().getTime()) {
+    cookieStore.delete('user_info');
+    return NextResponse.json(null);
+  }
   return NextResponse.json(userInfo);
 }
