@@ -29,7 +29,6 @@ const Login = () => {
     <div className="bg-ceos-3 w-full h-full flex flex-col items-center pt-[10%] md:pt-[77px]">
       <div className="text-white font-bold text-4xl my-6">로그인</div>
       <form
-        action=""
         className="flex flex-col w-[90%] max-w-[790px] items-center px-[10%] pt-12 pb-6 bg-white rounded-[10px]"
         onSubmit={handleSubmit}
       >
