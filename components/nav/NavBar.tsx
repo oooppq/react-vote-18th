@@ -1,6 +1,6 @@
 'use client';
 
-import NavButton from '@/components/common/NavButton';
+import NavButton from '@/components/nav/NavButton';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
