@@ -5,6 +5,8 @@ import { useSession } from '@/hooks/useSession';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { TUserInfo } from '@/types';
+import UnauthorizedInfo from '@/components/nav/UnauthorizedInfo';
+import AuthorizedInfo from '@/components/nav/AuthorizedInfo';
 
 const NavBar = () => {
   const router = useRouter();
@@ -30,24 +32,21 @@ const NavBar = () => {
       </button>
       {userInfo !== undefined ? (
         userInfo ? (
-          <div className="">{userInfo.name}</div>
+          <AuthorizedInfo
+            userInfo={userInfo}
+            handleClickLogoutButton={() => {
+              // logout(userInfo.accessToken);
+            }}
+          />
         ) : (
-          <>
-            <NavButton
-              buttonStyle="mr-2.5 border border-ceos-1"
-              title="로그인"
-              handleClickButton={() => {
-                router.push('/login');
-              }}
-            />
-            <NavButton
-              buttonStyle="mr-2.5 bg-ceos-1 text-white"
-              title="회원가입"
-              handleClickButton={() => {
-                router.push('/join');
-              }}
-            />
-          </>
+          <UnauthorizedInfo
+            handleClickLoginButton={() => {
+              router.push('/login');
+            }}
+            handleClickJoinButton={() => {
+              router.push('/join');
+            }}
+          />
         )
       ) : null}
     </div>
