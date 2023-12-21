@@ -1,11 +1,8 @@
 'use client';
 
 import AuthInput from '@/components/auth/AuthInput';
-import { useRouter } from 'next/navigation';
 
 const Login = () => {
-  const router = useRouter();
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -20,7 +17,7 @@ const Login = () => {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        router.push('/');
+        location.replace('/');
       }
     } catch {}
   };

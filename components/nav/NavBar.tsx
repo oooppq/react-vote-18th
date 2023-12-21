@@ -13,6 +13,19 @@ const NavBar = () => {
   const pathname = usePathname();
   const userInfo: TUserInfo | null | undefined = useSession();
 
+  const handleClickLogoutButton = async () => {
+    const serverReqHeaders = new Headers();
+    serverReqHeaders.set('Authorization', userInfo!.accessToken);
+    try {
+      const res = await fetch('/api/logout', {
+        method: 'POST',
+      });
+      if (res.ok) {
+        location.reload();
+      }
+    } catch {}
+  };
+
   if (pathname === '/login' || pathname === '/join') return null;
 
   return (
@@ -34,9 +47,7 @@ const NavBar = () => {
         userInfo ? (
           <AuthorizedInfo
             userInfo={userInfo}
-            handleClickLogoutButton={() => {
-              // logout(userInfo.accessToken);
-            }}
+            handleClickLogoutButton={handleClickLogoutButton}
           />
         ) : (
           <UnauthorizedInfo
