@@ -1,6 +1,7 @@
 'use client';
 
 import AuthInput from '@/components/auth/AuthInput';
+import Link from 'next/link';
 
 const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,10 +36,16 @@ const Login = () => {
         {/* <AuthStatusMessage /> */}
         <button
           type="submit"
-          className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-8 font-bold"
+          className="bg-ceos-1 rounded-[5px] w-[120px] text-white px-4 py-1 mt-8 font-bold"
         >
           로그인
         </button>
+        <Link
+          href="/join"
+          className="text-[#707070] mt-2 pb-[1px] border-b border-[#707070]"
+        >
+          회원가입
+        </Link>
       </form>
     </div>
   );
