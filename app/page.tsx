@@ -24,10 +24,12 @@ const Home = async () => {
             </>
           </VoteBanner>
           <HoveringLink
-            to={userInfo ? '/result' : '/vote'}
+            to={
+              userInfo ? (userInfo.isPartDone ? '/result' : '/vote') : '/login'
+            }
             buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
           >
-            투표하기
+            {userInfo?.isPartDone ? '결과보기' : '투표하기'}
           </HoveringLink>
         </div>
         <div className="mx-2 md:mx-4 flex flex-col items-center">
@@ -38,10 +40,12 @@ const Home = async () => {
             </>
           </VoteBanner>
           <HoveringLink
-            to={userInfo ? '/result' : '/vote'}
+            to={
+              userInfo ? (userInfo.isDemoDone ? '/result' : '/vote') : '/login'
+            }
             buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
           >
-            투표하기
+            {userInfo?.isDemoDone ? '결과보기' : '투표하기'}
           </HoveringLink>
         </div>
       </div>
