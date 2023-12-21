@@ -16,9 +16,7 @@ export const useSession = () => {
           const stored = await res.json();
           setUserInfo(stored);
         } else throw new Error();
-      } catch {
-        console.log('test');
-      }
+      } catch {}
     })();
   }, [pathName]);
 
