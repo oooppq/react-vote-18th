@@ -12,6 +12,7 @@ const config: Config = {
         ceos: {
           1: '#384084',
           2: '#242957',
+          3: '#373F83',
         },
       },
       backgroundImage: {
