@@ -13,7 +13,7 @@ const page = () => {
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response = await fetch('/api/v1/part-leader/votes');
+        const response = await fetch('/api/v1/demoday/results');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

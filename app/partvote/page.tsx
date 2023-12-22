@@ -16,7 +16,18 @@ const VOTE_ITEMS = [
   { team: '셰어마인드', name: '이규호', id: 18 },
   { team: '셰어마인드', name: '정인영', id: 20 },
 ];
-
+const VOTE_ITEMS2 = [
+  { team: '스니프', name: '조윤주', id: 8 },
+  { team: '스니프', name: '이윤서', id: 5 },
+  { team: 'BE', name: '김경민', id: 1 },
+  { team: 'BE', name: '이소현', id: 2 },
+  { team: 'BE', name: '이영교', id: 3 },
+  { team: 'BE', name: '이유정', id: 4 },
+  { team: 'BE', name: '이윤정', id: 6 },
+  { team: 'BE', name: '이종미', id: 7 },
+  { team: 'BE', name: '최예원', id: 9 },
+  { team: 'BE', name: '최현수', id: 10 },
+];
 const Page = () => {
   const [selected, setSelected] = useState('');
 
@@ -29,7 +40,7 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post('/api/partvote', {
+      const response = await axios.post('/api/v1/part-leader/votes?part=FE`', {
         id: selectedVoteItem.id,
       });
 
