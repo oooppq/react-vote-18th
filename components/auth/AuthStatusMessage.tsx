@@ -1,7 +1,20 @@
 import React from 'react';
 
-const AuthStatusMessage = () => {
-  return <div>AuthStatusMessage</div>;
+interface AuthStatusMessageProps {
+  message: string;
+  isWrong: Boolean | undefined;
+}
+
+const AuthStatusMessage = ({ message, isWrong }: AuthStatusMessageProps) => {
+  return (
+    <div
+      className={`w-full h-[14px] text-xs mt-2 ml-10 ${
+        isWrong ? 'text-[#ca2d18]' : 'text-[#09aa5c]'
+      }`}
+    >
+      {message}
+    </div>
+  );
 };
 
 export default AuthStatusMessage;

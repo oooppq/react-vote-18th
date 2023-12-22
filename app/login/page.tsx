@@ -11,7 +11,7 @@ const Login = () => {
     event.preventDefault();
 
     const payload = {
-      loginId: event.currentTarget.userId.value,
+      loginId: event.currentTarget.loginId.value,
       password: event.currentTarget.password.value,
     };
 
@@ -39,7 +39,7 @@ const Login = () => {
         className="flex flex-col w-[90%] max-w-[790px] items-center px-[10%] pt-12 pb-6 bg-white rounded-[10px]"
         onSubmit={handleSubmit}
       >
-        <AuthInput placeHolder="아이디" inputName="userId" inputStyle="mb-3" />
+        <AuthInput placeHolder="아이디" inputName="loginId" inputStyle="mb-3" />
         <AuthInput placeHolder="비밀번호" inputName="password" isPassword />
         <div className=" h-5 my-2 text-[#ca2d18] text-[14px]">
           {loginErrorStatus}
