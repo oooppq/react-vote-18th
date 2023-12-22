@@ -11,3 +11,8 @@ body {
 input:focus {
   outline: none;
 }
+
+/* [type='radio'] {
+  vertical-align: middle;
+  appearance: none;
+} */

@@ -2,7 +2,7 @@
 
 import AuthInput from '@/components/auth/AuthInput';
 import AuthStatusMessage from '@/components/auth/AuthStatusMessage';
-import Dropdown from '@/components/auth/Dropdown';
+import Option from '@/components/auth/Option';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useJoinHandler } from '@/hooks/useJoinHandler';
 
@@ -84,12 +84,18 @@ const Join = () => {
           message={emailWarningMessage}
           isWrong={wrongEmailFlag || duplicateEmailFlag}
         />
-        <div className="flex justify-between w-[60%]">
-          <Dropdown options={['FE', 'BE']} title="파트" />
-          <Dropdown
-            options={['레디', '셰어마인드', '스니프', '갓챠', '로컬무드']}
-            title="팀"
-          />
+        <div className="w-full px-5 text-[#707070] text-[14px]">
+          <div className="flex my-1">
+            <div className="w-[40px] border-r border-[#e3e3e3] mr-2">파트</div>
+            <Option options={['FE', 'BE']} title="part" />
+          </div>
+          <div className="flex mt-3">
+            <div className="w-[40px] border-r border-[#e3e3e3]  mr-2">팀</div>
+            <Option
+              options={['레디', '셰어마인드', '스니프', '갓챠', '로컬무드']}
+              title="team"
+            ></Option>
+          </div>
         </div>
         <button
           type="submit"
