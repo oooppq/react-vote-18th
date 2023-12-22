@@ -77,7 +77,7 @@ export const useJoinHandler = () => {
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
-  const handleChangeName = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
     if (/^([a-zA-Z0-9가-힣]){1,5}$/.test(str)) {
       setWrongNameFlag(false);
@@ -90,6 +90,13 @@ export const useJoinHandler = () => {
   const handleChangeId = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
     if (/[a-z0-9]{6,20}$/g.test(str)) {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/loginId`
+      );
+      if (res.ok) {
+        setDuplicateIdFlag(false);
+      } else setDuplicateIdFlag(true);
+
       setWrongIdFlag(false);
     } else {
       setWrongIdFlag(true);
@@ -97,9 +104,7 @@ export const useJoinHandler = () => {
     setLoginId(str);
   };
 
-  const handleChangePassword = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
     if (/^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/.test(str)) {
       setWrongPwFlag(false);
@@ -109,7 +114,7 @@ export const useJoinHandler = () => {
     setPassword(str);
   };
 
-  const handleChangePasswordConfirm = async (
+  const handleChangePasswordConfirm = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const str = e.target.value;
@@ -123,6 +128,13 @@ export const useJoinHandler = () => {
   const handleChangeEmail = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
     if (/\S+@\S+\.\S+/.test(str)) {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/email`
+      );
+      if (res.ok) {
+        setDuplicateEmailFlag(false);
+      } else setDuplicateEmailFlag(true);
+
       setWrongEmailFlag(false);
     } else {
       setWrongEmailFlag(true);
@@ -151,7 +163,7 @@ export const useJoinHandler = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3004/join', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/join`, {
         method: 'POST',
         body: JSON.stringify(payload),
       });
