@@ -2,6 +2,7 @@
 
 import AuthInput from '@/components/auth/AuthInput';
 import AuthStatusMessage from '@/components/auth/AuthStatusMessage';
+import Dropdown from '@/components/auth/Dropdown';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useJoinHandler } from '@/hooks/useJoinHandler';
 
@@ -83,6 +84,13 @@ const Join = () => {
           message={emailWarningMessage}
           isWrong={wrongEmailFlag || duplicateEmailFlag}
         />
+        <div className="flex justify-between w-[60%]">
+          <Dropdown options={['FE', 'BE']} title="파트" />
+          <Dropdown
+            options={['레디', '셰어마인드', '스니프', '갓챠', '로컬무드']}
+            title="팀"
+          />
+        </div>
         <button
           type="submit"
           className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-8 font-bold"
