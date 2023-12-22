@@ -2,6 +2,7 @@
 import React from 'react';
 import VoteResultItem from '@/components/vote/VoteResult';
 import HoveringButton from '@/components/common/HoveringButton';
+import axios from 'axios';
 interface Candidate {
   id: number;
   name: string;
@@ -13,11 +14,9 @@ const page = () => {
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response = await fetch('/api/v1/part-leader/votes');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
+        const response: any = await axios.get('/api/v1/part-leader/votes');
+        const data = response.data;
+        console.log(data);
         setVoteResults(data);
       } catch (error) {
         console.error(error);

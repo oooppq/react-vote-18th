@@ -35,6 +35,13 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { id } = body;
     console.log(id);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/part-leader/results?part=FE`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: id })
+    });
     return new Response(JSON.stringify({ message: "Vote registered successfully" }), {
       status: 200,
       headers: {

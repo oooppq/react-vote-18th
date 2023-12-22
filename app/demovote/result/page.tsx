@@ -2,6 +2,7 @@
 import React from 'react';
 import VoteResultItem from '@/components/vote/VoteResult';
 import HoveringButton from '@/components/common/HoveringButton';
+import axios from 'axios';
 interface Candidate {
   id: number;
   name: string;
@@ -13,11 +14,8 @@ const page = () => {
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response = await fetch('/api/v1/demoday/results');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
+        const response: any = await axios.get('/api/v1/demoday/votes');
+        const data = response.data;
         setVoteResults(data);
       } catch (error) {
         console.error(error);
@@ -29,7 +27,7 @@ const page = () => {
   return (
     <div className="p-8">
       <h1 className="text-center text-3xl font-bold text-[#1E40AF] mb-8">
-        파트장 투표결과
+        데모데이 투표결과
       </h1>
       <div className="grid grid-cols-2 gap-4">
         {voteResults.map((result: any) => (

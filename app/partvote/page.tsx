@@ -33,18 +33,15 @@ const Page = () => {
 
   const handleVote = async () => {
     const selectedVoteItem = VOTE_ITEMS.find((item) => item.name === selected);
-
     if (!selectedVoteItem) {
       console.error('No selection made');
       return;
     }
-
     try {
-      const response = await axios.post('/api/v1/part-leader/votes?part=FE`', {
+      const response = await axios.post('/api/v1/part-leader/votes', {
         id: selectedVoteItem.id,
       });
-
-      console.log('투표 성공:', response.data);
+      console.log('투표 성공:', response);
     } catch (error) {
       console.error('투표 실패:', error);
     }
