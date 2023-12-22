@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import VoteResultItem from "@/components/vote/VoteResult";
-import HoveringButton from "@/components/common/HoveringButton";
+'use client';
+import React from 'react';
+import VoteResultItem from '@/components/vote/VoteResult';
+import HoveringButton from '@/components/common/HoveringButton';
 interface Candidate {
   id: number;
   name: string;
@@ -13,9 +13,9 @@ const page = () => {
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response = await fetch("/api/partvote?part=FE");
+        const response = await fetch('/api/partvote?part=FE');
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error('Failed to fetch data');
         }
         const data = await response.json();
         setVoteResults(data);
@@ -23,7 +23,6 @@ const page = () => {
         console.error(error);
       }
     }
-
     fetchResults();
   }, []);
 
