@@ -15,6 +15,7 @@ const Join = () => {
     differentPwFlag,
     wrongEmailFlag,
     duplicateEmailFlag,
+    notSelectedFlag,
     joinDoneFlag,
     handleChangeName,
     handleChangeId,
@@ -85,21 +86,29 @@ const Join = () => {
           isWrong={wrongEmailFlag || duplicateEmailFlag}
         />
         <div className="w-full px-5 text-[#707070] text-[14px]">
-          <div className="flex my-1">
-            <div className="w-[40px] border-r border-[#e3e3e3] mr-2">파트</div>
+          <div className="flex mt-1">
+            <div className="w-[40px] h-[21px] pb-3 border-r border-[#e3e3e3] mr-2">
+              파트
+            </div>
             <Option options={['FE', 'BE']} title="part" />
           </div>
-          <div className="flex mt-3">
-            <div className="w-[40px] border-r border-[#e3e3e3]  mr-2">팀</div>
+          <div className="flex">
+            <div className="w-[40px] h-[21px]  border-r border-[#e3e3e3]  mr-2">
+              팀
+            </div>
             <Option
               options={['레디', '셰어마인드', '스니프', '갓챠', '로컬무드']}
               title="team"
             ></Option>
           </div>
         </div>
+        <AuthStatusMessage
+          message={notSelectedFlag ? '파트 / 팀을 선택해주세요.' : ''}
+          isWrong={notSelectedFlag}
+        />
         <button
           type="submit"
-          className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-8 font-bold"
+          className="bg-ceos-1 rounded-[5px] text-white px-4 py-1 mt-5 font-bold"
         >
           가입하기
         </button>

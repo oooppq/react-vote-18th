@@ -22,11 +22,13 @@ export const useJoinHandler = () => {
   const [duplicateEmailFlag, setDuplicateEmailFlag] = useState<
     boolean | undefined
   >(undefined);
+  const [notSelectedFlag, setNotSelectedFlag] = useState<boolean | undefined>(
+    undefined
+  );
   const [joinDoneFlag, setJoinDoneFlag] = useState<boolean | undefined>(
     undefined
   );
 
-  console.log(wrongIdFlag, duplicateIdFlag);
   const nameWarningMessage =
     wrongNameFlag !== undefined
       ? wrongNameFlag
@@ -144,24 +146,31 @@ export const useJoinHandler = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (
-      wrongNameFlag ||
-      wrongIdFlag ||
-      duplicateIdFlag ||
-      wrongPwFlag ||
-      differentPwFlag ||
-      wrongEmailFlag ||
-      duplicateEmailFlag
-    )
+    // if (
+    //   wrongNameFlag ||
+    //   wrongIdFlag ||
+    //   duplicateIdFlag ||
+    //   wrongPwFlag ||
+    //   differentPwFlag ||
+    //   wrongEmailFlag ||
+    //   duplicateEmailFlag
+    // )
+    //   return;
+    if (!event.currentTarget.part.value || !event.currentTarget.team.value) {
+      setNotSelectedFlag(true);
       return;
+    }
 
     const payload = {
       name: event.currentTarget.username.value,
       loginId: event.currentTarget.loginId.value,
       password: event.currentTarget.password.value,
       email: event.currentTarget.email.value,
+      part: event.currentTarget.part.value,
+      teamName: event.currentTarget.team.value,
     };
 
+    console.log(payload);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/join`, {
         method: 'POST',
@@ -182,6 +191,7 @@ export const useJoinHandler = () => {
     differentPwFlag,
     wrongEmailFlag,
     duplicateEmailFlag,
+    notSelectedFlag,
     joinDoneFlag,
     handleChangeName,
     handleChangeId,
