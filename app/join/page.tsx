@@ -16,7 +16,6 @@ const Join = () => {
     wrongEmailFlag,
     duplicateEmailFlag,
     notSelectedFlag,
-    joinDoneFlag,
     handleChangeName,
     handleChangeId,
     handleChangePassword,
@@ -31,7 +30,7 @@ const Join = () => {
   } = useJoinHandler();
 
   return (
-    <div className="bg-ceos-3 w-full h-full flex flex-col items-center pt-[10%] md:pt-[77px]">
+    <div className="bg-ceos-3 w-full h-full flex flex-col items-center md:pt-[77px]">
       <div className="text-white font-bold text-4xl my-6">회원가입</div>
       <form
         action=""
@@ -85,8 +84,8 @@ const Join = () => {
           message={emailWarningMessage}
           isWrong={wrongEmailFlag || duplicateEmailFlag}
         />
-        <div className="w-full px-5 text-[#707070] text-[14px]">
-          <div className="flex mt-1">
+        <div className="w-full mt-3 px-5 text-[#707070] text-[14px]">
+          <div className="flex">
             <div className="w-[40px] h-[21px] pb-3 border-r border-[#e3e3e3] mr-2">
               파트
             </div>

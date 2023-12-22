@@ -25,9 +25,6 @@ export const useJoinHandler = () => {
   const [notSelectedFlag, setNotSelectedFlag] = useState<boolean | undefined>(
     undefined
   );
-  const [joinDoneFlag, setJoinDoneFlag] = useState<boolean | undefined>(
-    undefined
-  );
 
   const nameWarningMessage =
     wrongNameFlag !== undefined
@@ -93,7 +90,11 @@ export const useJoinHandler = () => {
     const str = e.target.value;
     if (/[a-z0-9]{6,20}$/g.test(str)) {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/loginId`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/loginId`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ loginId }),
+        }
       );
       if (res.ok) {
         setDuplicateIdFlag(false);
@@ -131,7 +132,11 @@ export const useJoinHandler = () => {
     const str = e.target.value;
     if (/\S+@\S+\.\S+/.test(str)) {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/email`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/email`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ email }),
+        }
       );
       if (res.ok) {
         setDuplicateEmailFlag(false);
@@ -146,16 +151,16 @@ export const useJoinHandler = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // if (
-    //   wrongNameFlag ||
-    //   wrongIdFlag ||
-    //   duplicateIdFlag ||
-    //   wrongPwFlag ||
-    //   differentPwFlag ||
-    //   wrongEmailFlag ||
-    //   duplicateEmailFlag
-    // )
-    //   return;
+    if (
+      wrongNameFlag ||
+      wrongIdFlag ||
+      duplicateIdFlag ||
+      wrongPwFlag ||
+      differentPwFlag ||
+      wrongEmailFlag ||
+      duplicateEmailFlag
+    )
+      return;
     if (!event.currentTarget.part.value || !event.currentTarget.team.value) {
       setNotSelectedFlag(true);
       return;
@@ -172,12 +177,15 @@ export const useJoinHandler = () => {
 
     console.log(payload);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/join`, {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/signup`,
+        {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        }
+      );
       if (res.ok) {
-        setJoinDoneFlag(true);
+        location.replace('/login');
       } else {
       }
     } catch {}
@@ -192,7 +200,6 @@ export const useJoinHandler = () => {
     wrongEmailFlag,
     duplicateEmailFlag,
     notSelectedFlag,
-    joinDoneFlag,
     handleChangeName,
     handleChangeId,
     handleChangePassword,
