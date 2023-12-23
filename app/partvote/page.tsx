@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import VoteItem from '@/components/vote/VoteItem';
 import HoveringButton from '@/components/common/HoveringButton';
 import axios from 'axios';
+import { useSession } from '@/hooks/useSession';
 
 const VOTE_ITEMS = [
   { team: '스니프', name: '오대균', id: 17 },
@@ -19,18 +20,20 @@ const VOTE_ITEMS = [
 const VOTE_ITEMS2 = [
   { team: '스니프', name: '조윤주', id: 8 },
   { team: '스니프', name: '이윤서', id: 5 },
-  { team: 'BE', name: '김경민', id: 1 },
-  { team: 'BE', name: '이소현', id: 2 },
-  { team: 'BE', name: '이영교', id: 3 },
-  { team: 'BE', name: '이유정', id: 4 },
-  { team: 'BE', name: '이윤정', id: 6 },
-  { team: 'BE', name: '이종미', id: 7 },
-  { team: 'BE', name: '최예원', id: 9 },
-  { team: 'BE', name: '최현수', id: 10 },
+  { team: '셰어마인드', name: '김경민', id: 1 },
+  { team: '셰어마인드', name: '최예원', id: 9 },
+  { team: '로컬무드', name: '이소현', id: 2 },
+  { team: '로컬무드', name: '이유정', id: 4 },
+  { team: '레디', name: '최현수', id: 10 },
+  { team: '레디', name: '이영교', id: 3 },
+  { team: '갓챠', name: '이윤정', id: 6 },
+  { team: '갓챠', name: '이종미', id: 7 },
 ];
 const Page = () => {
   const [selected, setSelected] = useState('');
-
+  const session = useSession();
+  const voteItems = session?.part === 'FE' ? VOTE_ITEMS : VOTE_ITEMS2;
+  const token = session?.accessToken;
   const handleVote = async () => {
     const selectedVoteItem = VOTE_ITEMS.find((item) => item.name === selected);
     if (!selectedVoteItem) {
@@ -38,9 +41,17 @@ const Page = () => {
       return;
     }
     try {
-      const response = await axios.post('/api/v1/part-leader/votes', {
-        id: selectedVoteItem.id,
-      });
+      const response = await axios.post(
+        '/api/v1/part-leader/votes',
+        {
+          id: selectedVoteItem.id,
+        },
+        {
+          headers: {
+            AUTHORIZATION: token,
+          },
+        }
+      );
       console.log('투표 성공:', response);
     } catch (error) {
       console.error('투표 실패:', error);
@@ -52,7 +63,7 @@ const Page = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold mb-6">파트장 투표</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          {VOTE_ITEMS.map((item, index) => (
+          {voteItems.map((item, index) => (
             <VoteItem
               key={index}
               team={item.team}

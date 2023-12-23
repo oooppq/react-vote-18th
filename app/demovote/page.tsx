@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import VoteItem from '@/components/vote/VoteItem';
 import HoveringButton from '@/components/common/HoveringButton';
 import axios from 'axios';
-
+import { useSession } from '@/hooks/useSession';
 const VOTE_ITEMS = [
   { team: '스니프', description: '향수', count: 0 },
   { team: '레디', description: '레퍼런스', count: 0 },
@@ -14,7 +14,11 @@ const VOTE_ITEMS = [
 
 const Page = () => {
   const [selected, setSelected] = useState('');
-
+  const session = useSession();
+  const token = session?.accessToken;
+  const filteredVoteItems = VOTE_ITEMS.filter(
+    (item) => item.team !== session?.teamName
+  );
   const handleVote = async () => {
     const selectedVoteItem = VOTE_ITEMS.find((item) => item.team === selected);
 
@@ -24,11 +28,25 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post('/api/v1/demoday/votes', {
-        teamName: selectedVoteItem.team,
-      });
+      const response = await axios.post(
+        '/api/v1/demoday/votes',
+        {
+          teamName: selectedVoteItem.team,
+        },
+        {
+          headers: {
+            AUTHORIZATION: token,
+          },
+        }
+      );
 
-      console.log('투표 성공:', response.data);
+      if (response.status === 201) {
+        console.log('투표 성공:', response.status, response.data);
+      } else if (response.status === 409) {
+        console.log('투표 실패:', response.data.message);
+      } else if (response.status === 403) {
+        console.log('투표 실패:', response.data.message);
+      }
     } catch (error) {
       console.error('투표 실패:', error);
     }
@@ -39,7 +57,7 @@ const Page = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold mb-6">데모데이 투표</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          {VOTE_ITEMS.map((item, index) => (
+          {filteredVoteItems.map((item, index) => (
             <VoteItem
               key={index}
               team={item.team}
