@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-//쿠키에 저장되어있는 유저 정보 꺼내서 part 부분 세팅해야함
+import { getSession } from '@/utils/auth';
+
 export async function GET() {
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/demoday/result`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/demoday/results`);
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
@@ -31,24 +33,47 @@ export async function GET() {
   }
 }
 export async function POST(req: Request) {
+  const userInfo = await getSession();
   try {
     const body = await req.json();
-    
-    const { teamName } = body;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/demoday/vote`, {
-      method: 'POST',
+
+    const token = req.headers.get('AUTHORIZATION');
+
+    if (!token){
+            throw new Error('Invalid token');
+    }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/demoday/votes`, {
       headers: {
         'Content-Type': 'application/json',
+        'AUTHORIZATION': token
       },
-      body: JSON.stringify({ teamName: teamName })
+      method: 'POST',
+      body: JSON.stringify({ teamName: body.teamName })
     });
-    console.log(teamName);
-    return new Response(JSON.stringify({ message: "Vote registered successfully" }), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    if (res.ok) {
+      return new Response(JSON.stringify({ message: "Vote registered successfully" }), {
+        status: 201,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } else if (res.status === 403) {
+
+      return new Response(JSON.stringify({ message: "Token expired or invalid" }), {
+        status: 403,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } else {
+      const errorResponse = await res.json();
+      return new Response(JSON.stringify(errorResponse), {
+        status: res.status,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
   } catch (error) {
     return new Response(JSON.stringify({ message: "An error occurred" }), {
       status: 500,
