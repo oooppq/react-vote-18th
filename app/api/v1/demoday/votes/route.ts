@@ -33,16 +33,15 @@ export async function GET() {
   }
 }
 export async function POST(req: Request) {
-  const userInfo = await getSession();
   try {
     const body = await req.json();
-
+    
     const token = req.headers.get('AUTHORIZATION');
-
+    console.log(token);
     if (!token){
             throw new Error('Invalid token');
     }
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/demoday/votes`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/demoday/votes`, {
       headers: {
         'Content-Type': 'application/json',
         'AUTHORIZATION': token

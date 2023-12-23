@@ -34,7 +34,6 @@ const page = () => {
         {voteResults.map((result: any) => (
           <div key={result.id} className="flex flex-col space-y-4">
             <VoteResultItem
-              number={String(result.id % 10)}
               name={result.name}
               teamname={result.part}
               votes={result.count}

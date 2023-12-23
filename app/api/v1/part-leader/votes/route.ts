@@ -45,7 +45,7 @@ export async function POST(req: Request) {
      throw new Error('Invalid token');
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/part-leader/results?part=${part}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/part-leader/votes?part=${part}`, {
 
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       }
     });
   }else if(res.status === 403){
-    return new Response(JSON.stringify({ message: "You already voted" }), {
+    return new Response(JSON.stringify({ message: "Token expired" }), {
       status: 403,
       headers: {
         'Content-Type': 'application/json'
