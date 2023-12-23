@@ -14,7 +14,7 @@ const VoteItem = ({
   name,
   selected,
   onChange,
-  isPart, // part vote인지 여부
+  isPart,
 }: VoteItemProps) => {
   const handleClick = () => {
     if (isPart) onChange(name);
