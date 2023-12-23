@@ -6,8 +6,9 @@ const EXP_LIMIT = 1000 * 60 * 60 * 24;
 export async function POST(request: Request) {
   const body = await request.json();
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/login`, {
+    headers: { 'Content-Type': 'application/json'},
     method: 'POST',
-    body,
+    body: JSON.stringify({loginId: body.loginId, password: body.password}),
   });
 
   if (res.ok) {

@@ -58,6 +58,7 @@ export const useJoinHandler = () => {
         : '비밀번호가 일치합니다.'
       : '';
 
+      
   const emailWarningMessage = (() => {
     if (wrongEmailFlag === undefined && duplicateEmailFlag === undefined)
       return '';
@@ -92,6 +93,7 @@ export const useJoinHandler = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/users/loginId`,
         {
+          headers: {'Content-Type': 'application/json'},
           method: 'POST',
           body: JSON.stringify({ loginId }),
         }
@@ -134,6 +136,7 @@ export const useJoinHandler = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/users/email`,
         {
+          headers: {'Content-Type': 'application/json'},
           method: 'POST',
           body: JSON.stringify({ email }),
         }
@@ -180,6 +183,7 @@ export const useJoinHandler = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/users/signup`,
         {
+          headers: {'Content-Type': 'application/json'},
           method: 'POST',
           body: JSON.stringify(payload),
         }

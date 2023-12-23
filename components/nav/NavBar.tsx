@@ -14,11 +14,13 @@ const NavBar = () => {
   const userInfo: TUserInfo | null | undefined = useSession();
 
   const handleClickLogoutButton = async () => {
+    if (!userInfo) return;
     const serverReqHeaders = new Headers();
-    serverReqHeaders.set('Authorization', userInfo!.accessToken);
+    serverReqHeaders.set('AUTHORIZATION', userInfo!.accessToken);
     try {
       const res = await fetch('/api/logout', {
         method: 'POST',
+        headers: serverReqHeaders,
       });
       if (res.ok) {
         location.reload();
