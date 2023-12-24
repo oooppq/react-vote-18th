@@ -3,7 +3,7 @@ export interface TUserInfo {
   part: 'FE' | 'BE';
   name: string;
   accessToken: string;
-  isDemoDone: boolean;
-  isPartDone: boolean;
+  teamVoted: boolean;
+  candidateVoted: boolean;
   expTime: number;
 }

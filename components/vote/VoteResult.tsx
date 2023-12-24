@@ -4,7 +4,7 @@ interface VoteResultItemProps {
   number?: string;
   name: string;
   teamname: string;
-  votes: string;
+  votes: number;
 }
 
 const VoteResultItem = ({
