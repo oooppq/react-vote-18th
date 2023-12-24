@@ -24,21 +24,18 @@ const page = async () => {
   const candidates: Candidate[] = data?.teamList;
   return (
     <div className="p-8">
-      <h1 className="text-center text-3xl font-bold text-[#1E40AF] mb-8">
+      <h1 className="text-center text-3xl font-bold text-ceos-2 mb-8">
         데모데이 투표결과
       </h1>
-      <div className="grid grid-cols-2 gap-4">
-        {candidates.map((candidate) => (
-          <div
+      <div className="">
+        {candidates.map((candidate, idx) => (
+          <VoteResultItem
             key={`${candidate.teamName}${candidate.description}`}
-            className="flex flex-col space-y-4"
-          >
-            <VoteResultItem
-              name={candidate.teamName}
-              teamname={candidate.description}
-              votes={candidate.count}
-            />
-          </div>
+            number={idx + 1}
+            name={candidate.teamName}
+            teamname={candidate.description}
+            votes={candidate.count}
+          />
         ))}
       </div>
       <div className="mt-8 flex justify-center">

@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface VoteItemProps {
   team: string;
@@ -24,10 +24,12 @@ const VoteItem = ({
     <div
       onClick={handleClick}
       className={`${
-        selected ? "bg-blue-200" : "bg-white"
-      }  w-[18rem] h-[6rem] border-2 border-[#3B82F6] text-[#1E40AF] p-4 rounded-lg flex flex-col justify-center items-center mx-auto cursor-pointer`}
+        selected
+          ? 'bg-ceos-1 text-white'
+          : 'bg-white text-black border-2 border-black'
+      }  w-[120px] sm:w-[180px] h-[6rem] p-4 font-bold rounded-lg flex flex-col justify-center items-center mx-auto cursor-pointer transition-colors`}
     >
-      <div>{team}</div>
+      <div className="font-normal">{team}</div>
       <div>{name}</div>
     </div>
   );
