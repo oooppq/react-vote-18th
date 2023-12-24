@@ -6,11 +6,11 @@ export async function POST(request: Request) {
   const serverReqHeaders = new Headers();
   serverReqHeaders.set('AUTHORIZATION', clientReqHeaders.get('AUTHORIZATION')!);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/uesrs/logout`,
-     {
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/users/logout`,
+    {
       method: 'POST',
       headers: serverReqHeaders,
-  }
+    }
   );
 
   if (res.ok) {

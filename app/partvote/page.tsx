@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import VoteItem from '@/components/vote/VoteItem';
 import HoveringButton from '@/components/common/HoveringButton';
-import axios from 'axios';
 import { useSession } from '@/hooks/useSession';
 
 const VOTE_ITEMS = [
@@ -41,17 +40,16 @@ const Page = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        '/api/v1/part-leader/votes',
-        {
+      const headers = new Headers();
+      headers.set('AUTHORIZATION', token!);
+
+      const response = await fetch('/api/v1/part-leader/votes', {
+        method: 'POST',
+        body: JSON.stringify({
           id: selectedVoteItem.id,
-        },
-        {
-          headers: {
-            AUTHORIZATION: token,
-          },
-        }
-      );
+        }),
+        headers,
+      });
       console.log('투표 성공:', response);
     } catch (error) {
       console.error('투표 실패:', error);

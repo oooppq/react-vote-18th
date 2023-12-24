@@ -2,7 +2,7 @@
 import React from 'react';
 import VoteResultItem from '@/components/vote/VoteResult';
 import HoveringButton from '@/components/common/HoveringButton';
-import axios from 'axios';
+
 interface Candidate {
   id: number;
   name: string;
@@ -14,9 +14,12 @@ const page = () => {
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response: any = await axios.get('/api/v1/demoday/votes');
-        const data = response.data;
-        setVoteResults(data);
+        const res = await fetch('/api/v1/demoday/votes');
+        if (res.ok) {
+          const results = await res.json();
+          console.log(results);
+          setVoteResults(results);
+        }
       } catch (error) {
         console.error(error);
       }

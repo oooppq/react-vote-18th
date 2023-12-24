@@ -2,22 +2,25 @@
 import React from 'react';
 import VoteResultItem from '@/components/vote/VoteResult';
 import HoveringButton from '@/components/common/HoveringButton';
-import axios from 'axios';
+
 interface Candidate {
   id: number;
   name: string;
   part: string;
   count: number;
 }
+
 const page = () => {
   const [voteResults, setVoteResults] = React.useState<Candidate[]>([]);
   React.useEffect(() => {
     async function fetchResults() {
       try {
-        const response: any = await axios.get('/api/v1/part-leader/votes');
-        const data = response.data;
-        console.log(data);
-        setVoteResults(data);
+        const res = await fetch('/api/v1/part-leader/votes');
+        if (res.ok) {
+          const results = await res.json();
+          console.log(results);
+          setVoteResults(results);
+        }
       } catch (error) {
         console.error(error);
       }
