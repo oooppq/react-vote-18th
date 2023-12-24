@@ -1,5 +1,5 @@
 export interface TUserInfo {
-  team: string;
+  teamName: string;
   part: 'FE' | 'BE';
   name: string;
   accessToken: string;
