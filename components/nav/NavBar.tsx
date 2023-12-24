@@ -13,6 +13,7 @@ const NavBar = () => {
   const pathname = usePathname();
   const userInfo: TUserInfo | null | undefined = useSession();
 
+  // 일단 누르기만하면 바로 로그아웃되도록 해둠
   const handleClickLogoutButton = async () => {
     if (!userInfo) return;
     const serverReqHeaders = new Headers();
@@ -27,7 +28,9 @@ const NavBar = () => {
       if (res.ok) {
         // do something
       }
-    } catch {}
+    } catch {
+      location.reload();
+    }
   };
 
   if (pathname === '/login' || pathname === '/join') return null;
