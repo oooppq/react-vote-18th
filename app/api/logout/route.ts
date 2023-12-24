@@ -13,9 +13,8 @@ export async function POST(request: Request) {
       cache: 'no-cache',
     }
   );
-
+  cookies().delete('user_info');
   if (res.ok) {
-    cookies().delete('user_info');
     return new Response('Logout Success', {
       status: 200,
     });
