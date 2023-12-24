@@ -40,7 +40,7 @@ const Page = () => {
       });
 
       if (response.status === 201) {
-        location.replace('/demoday/result');
+        location.replace('/demovote/result');
       } else if (response.status === 409) {
         // console.log('투표 실패:', response.data.message);
       } else if (response.status === 403) {

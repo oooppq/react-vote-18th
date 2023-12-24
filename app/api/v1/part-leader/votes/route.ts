@@ -1,11 +1,11 @@
 import { getSession } from '@/utils/auth';
+import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
   const userInfo = await getSession();
   const part = userInfo?.part;
   try {
     const body = await req.json();
-    const { id } = body;
     const token = req.headers.get('AUTHORIZATION');
     if (!token) {
       throw new Error('Invalid token');
@@ -22,7 +22,15 @@ export async function POST(req: Request) {
         body: JSON.stringify({ id: body.id }),
       }
     );
+
     if (res.ok) {
+      cookies().set(
+        'user_info',
+        JSON.stringify({
+          ...userInfo,
+          candidateVoted: true,
+        })
+      );
       return new Response(
         JSON.stringify({ message: 'Vote registered successfully' }),
         {
