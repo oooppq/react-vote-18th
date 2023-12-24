@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import VoteItem from '@/components/vote/VoteItem';
 import HoveringButton from '@/components/common/HoveringButton';
-import axios from 'axios';
 import { useSession } from '@/hooks/useSession';
+
 const VOTE_ITEMS = [
   { team: '스니프', description: '향수', count: 0 },
   { team: '레디', description: '레퍼런스', count: 0 },
@@ -28,27 +28,26 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post(
-        '/api/v1/demoday/votes',
-        {
+      const headers = new Headers();
+      headers.set('AUTHORIZATION', token!);
+
+      const response = await fetch('/api/v1/demoday/votes', {
+        method: 'POST',
+        body: JSON.stringify({
           teamName: selectedVoteItem.team,
-        },
-        {
-          headers: {
-            AUTHORIZATION: token,
-          },
-        }
-      );
+        }),
+        headers,
+      });
 
       if (response.status === 201) {
-        console.log('투표 성공:', response.status, response.data);
+        location.replace('/demovote/result');
       } else if (response.status === 409) {
-        console.log('투표 실패:', response.data.message);
+        // console.log('투표 실패:', response.data.message);
       } else if (response.status === 403) {
-        console.log('투표 실패:', response.data.message);
+        // console.log('투표 실패:', response.data.message);
       }
     } catch (error) {
-      console.error('투표 실패:', error);
+      // console.error('투표 실패:', error);
     }
   };
 
