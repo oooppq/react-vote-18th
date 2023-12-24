@@ -28,19 +28,22 @@ const page = async () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-center text-3xl font-bold text-[#1E40AF] mb-8">
+      <h1 className="text-center text-3xl font-bold text-ceos-2 mb-8">
         파트장 투표결과
       </h1>
-      <div className="grid grid-cols-2 gap-4">
-        {candidates.map((candidate: Candidate) => (
-          <div key={candidate.id} className="flex flex-col space-y-4">
+      <div className="">
+        {candidates
+          .sort()
+          .slice(0, 5)
+          .map((candidate: Candidate, idx) => (
             <VoteResultItem
+              key={candidate.id}
+              number={idx + 1}
               name={candidate.name}
               teamname={candidate.part}
               votes={candidate.count}
             />
-          </div>
-        ))}
+          ))}
       </div>
       <div className="mt-8 flex justify-center">
         <HoveringLink to="/" buttonStyle="w-[100px] h-[60px] mt-4 md:w-[200px]">

@@ -55,7 +55,7 @@ const Page = () => {
     <div className="p-8">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold mb-6">데모데이 투표</h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">
           {filteredVoteItems.map((item, index) => (
             <VoteItem
               key={index}
