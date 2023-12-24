@@ -11,7 +11,7 @@ export const useSession = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/session');
+        const res = await fetch('/api/session', { cache: 'no-cache' });
         if (res.ok) {
           const stored = await res.json();
           setUserInfo(stored);

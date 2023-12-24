@@ -139,6 +139,7 @@ export const useJoinHandler = () => {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: JSON.stringify({ email: str }),
+          cache: 'no-cache',
         }
       );
       if (res.ok) {
@@ -185,6 +186,7 @@ export const useJoinHandler = () => {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: JSON.stringify(payload),
+          cache: 'no-cache',
         }
       );
       if (res.ok) {

@@ -19,6 +19,7 @@ const Login = () => {
       const res = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify(payload),
+        cache: 'no-cache',
       });
       if (res.ok) {
         location.replace('/');

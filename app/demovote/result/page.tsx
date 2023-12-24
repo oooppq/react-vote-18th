@@ -9,7 +9,8 @@ interface Candidate {
 
 const getDemoResults = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/demoday/results`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/demoday/results`,
+    { cache: 'no-cache' }
   );
 
   if (res.ok) {

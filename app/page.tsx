@@ -23,12 +23,22 @@ const Home = async () => {
               파트장 투표
             </>
           </VoteBanner>
-          <HoveringLink
-            to={userInfo?.candidateVoted ? '/partvote/result' : '/partvote'}
-            buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
-          >
-            {userInfo?.candidateVoted ? '결과보기' : '투표하기'}
-          </HoveringLink>
+          {!userInfo?.candidateVoted ? (
+            <HoveringLink
+              to="/partvote"
+              buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
+            >
+              투표하기
+            </HoveringLink>
+          ) : null}
+          {userInfo ? (
+            <HoveringLink
+              to="/partvote/result"
+              buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
+            >
+              결과보기
+            </HoveringLink>
+          ) : null}
         </div>
         <div className="mx-2 md:mx-4 flex flex-col items-center">
           <VoteBanner>
@@ -37,12 +47,23 @@ const Home = async () => {
               <br /> 우승팀 투표
             </>
           </VoteBanner>
-          <HoveringLink
-            to={userInfo?.teamVoted ? '/demovote/result' : '/demovote'}
-            buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
-          >
-            {userInfo?.teamVoted ? '결과보기' : '투표하기'}
-          </HoveringLink>
+          {!userInfo?.teamVoted ? (
+            <HoveringLink
+              to={userInfo?.teamVoted ? '/demovote/result' : '/demovote'}
+              buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
+            >
+              투표하기
+            </HoveringLink>
+          ) : null}
+
+          {userInfo ? (
+            <HoveringLink
+              to="/demovote/result"
+              buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
+            >
+              결과보기
+            </HoveringLink>
+          ) : null}
         </div>
       </div>
     </div>

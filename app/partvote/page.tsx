@@ -31,11 +31,14 @@ const VOTE_ITEMS2 = [
 
 const Page = () => {
   const [selected, setSelected] = useState('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const session = useSession();
   const voteItems = session?.part === 'FE' ? VOTE_ITEMS : VOTE_ITEMS2;
   const token = session?.accessToken;
   const handleVote = async () => {
-    const selectedVoteItem = VOTE_ITEMS.find((item) => item.name === selected);
+    if (isLoading) return;
+    const selectedVoteItem = voteItems.find((item) => item.name === selected);
     if (!selectedVoteItem) {
       console.error('No selection made');
       return;
@@ -43,14 +46,16 @@ const Page = () => {
     try {
       const headers = new Headers();
       headers.set('AUTHORIZATION', token!);
-
+      setIsLoading(true);
       const res = await fetch('/api/v1/part-leader/votes', {
         method: 'POST',
         body: JSON.stringify({
           id: selectedVoteItem.id,
         }),
         headers,
+        cache: 'no-cache',
       });
+      setIsLoading(false);
       if (res.ok) {
         location.replace('/partvote/result');
       }

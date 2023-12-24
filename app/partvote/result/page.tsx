@@ -1,6 +1,7 @@
 import VoteResultItem from '@/components/vote/VoteResult';
 import { getSession } from '@/utils/auth';
 import HoveringLink from '@/components/common/HoveringLink';
+import Link from 'next/link';
 
 interface Candidate {
   id: number;
@@ -9,9 +10,14 @@ interface Candidate {
   count: number;
 }
 
+interface PartvoteResultProps {
+  searchParams: { [key: string]: 'FE' | 'BE' | undefined };
+}
+
 const getPartLeaderResults = async (part: 'FE' | 'BE') => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/part-leader/results?part=${part}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/part-leader/results?part=${part}`,
+    { cache: 'no-cache' }
   );
   if (res.ok) {
     const results = await res.json();
@@ -20,10 +26,10 @@ const getPartLeaderResults = async (part: 'FE' | 'BE') => {
   return null;
 };
 
-const page = async () => {
+const page = async ({ searchParams }: PartvoteResultProps) => {
   const userInfo = await getSession();
-
-  const data = await getPartLeaderResults(userInfo?.part!);
+  const part = searchParams.part || userInfo?.part || 'FE'; // 걍혹시몰라서 default는 FE로..
+  const data = await getPartLeaderResults(part);
   const candidates: Candidate[] = data?.candidateList;
 
   return (
@@ -31,9 +37,27 @@ const page = async () => {
       <h1 className="text-center text-3xl font-bold text-ceos-2">
         파트장 투표결과
       </h1>
-      <h3 className="text-center mb-8 text-[#707070]">
+      <h3 className="text-center mb-5 text-[#707070]">
         [5위까지만 표시됩니다.]
       </h3>
+      <div className="w-full flex justify-center  mb-7">
+        <Link
+          href="?part=FE"
+          className={`${
+            part === 'FE' ? 'bg-ceos-1 text-white' : ''
+          } px-4 py-1 rounded-l-lg shadow-lg`}
+        >
+          FE
+        </Link>
+        <Link
+          href="?part=BE"
+          className={`${
+            part === 'BE' ? 'bg-ceos-1 text-white' : ''
+          } px-4 py-1 rounded-r-lg shadow-lg`}
+        >
+          BE
+        </Link>
+      </div>
       <div className="">
         {candidates
           .sort()

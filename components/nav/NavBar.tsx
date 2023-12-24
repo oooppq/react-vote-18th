@@ -21,6 +21,7 @@ const NavBar = () => {
       const res = await fetch('/api/logout', {
         method: 'POST',
         headers: serverReqHeaders,
+        cache: 'no-cache',
       });
       if (res.ok) {
         location.reload();
@@ -41,7 +42,7 @@ const NavBar = () => {
         <Image
           src="/ceos-logo.png"
           fill
-          className="!relative !w-[100px] md:!w-[172px]"
+          className="!relative !w-[100px] md:!w-[172px] !shrink-0"
           alt="ceos logo"
         />
       </button>

@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     {
       method: 'POST',
       headers: serverReqHeaders,
+      cache: 'no-cache',
     }
   );
 

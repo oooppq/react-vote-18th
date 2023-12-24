@@ -14,12 +14,15 @@ const VOTE_ITEMS = [
 
 const Page = () => {
   const [selected, setSelected] = useState('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const session = useSession();
   const token = session?.accessToken;
   const filteredVoteItems = VOTE_ITEMS.filter(
     (item) => item.team !== session?.teamName
   );
   const handleVote = async () => {
+    if (isLoading) return;
     const selectedVoteItem = VOTE_ITEMS.find((item) => item.team === selected);
 
     if (!selectedVoteItem) {
@@ -30,15 +33,16 @@ const Page = () => {
     try {
       const headers = new Headers();
       headers.set('AUTHORIZATION', token!);
-
+      setIsLoading(true);
       const response = await fetch('/api/v1/demoday/votes', {
         method: 'POST',
         body: JSON.stringify({
           teamName: selectedVoteItem.team,
         }),
         headers,
+        cache: 'no-cache',
       });
-
+      setIsLoading(false);
       if (response.status === 201) {
         location.replace('/demovote/result');
       } else if (response.status === 409) {
