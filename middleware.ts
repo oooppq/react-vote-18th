@@ -7,5 +7,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/vote', '/result'],
+  matcher: ['/partvote', '/demovote', '/partvote/result', '/demovote/result'],
 };

@@ -94,7 +94,8 @@ export const useJoinHandler = () => {
         {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
-          body: JSON.stringify({ loginId }),
+          body: JSON.stringify({ loginId: str }),
+          cache: 'no-cache',
         }
       );
       if (res.ok) {
@@ -137,7 +138,7 @@ export const useJoinHandler = () => {
         {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email: str }),
         }
       );
       if (res.ok) {
