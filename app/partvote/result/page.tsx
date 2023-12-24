@@ -1,6 +1,6 @@
 import VoteResultItem from '@/components/vote/VoteResult';
-import HoveringButton from '@/components/common/HoveringButton';
 import { getSession } from '@/utils/auth';
+import HoveringLink from '@/components/common/HoveringLink';
 
 interface Candidate {
   id: number;
@@ -43,9 +43,9 @@ const page = async () => {
         ))}
       </div>
       <div className="mt-8 flex justify-center">
-        <HoveringButton buttonStyle="w-[100px] h-[60px] mt-4 md:w-[200px]">
+        <HoveringLink to="/" buttonStyle="w-[100px] h-[60px] mt-4 md:w-[200px]">
           돌아가기
-        </HoveringButton>
+        </HoveringLink>
       </div>
     </div>
   );

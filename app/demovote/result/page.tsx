@@ -1,5 +1,5 @@
 import VoteResultItem from '@/components/vote/VoteResult';
-import HoveringButton from '@/components/common/HoveringButton';
+import HoveringLink from '@/components/common/HoveringLink';
 
 interface Candidate {
   teamName: string;
@@ -22,7 +22,6 @@ const getDemoResults = async () => {
 const page = async () => {
   const data = await getDemoResults();
   const candidates: Candidate[] = data?.teamList;
-
   return (
     <div className="p-8">
       <h1 className="text-center text-3xl font-bold text-[#1E40AF] mb-8">
@@ -43,9 +42,9 @@ const page = async () => {
         ))}
       </div>
       <div className="mt-8 flex justify-center">
-        <HoveringButton buttonStyle="w-[100px] h-[60px] mt-4 md:w-[200px]">
+        <HoveringLink to="/" buttonStyle="w-[100px] h-[60px] mt-4 md:w-[200px]">
           돌아가기
-        </HoveringButton>
+        </HoveringLink>
       </div>
     </div>
   );
