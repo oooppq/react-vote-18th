@@ -23,8 +23,9 @@ const NavBar = () => {
         headers: serverReqHeaders,
         cache: 'no-cache',
       });
+      location.reload();
       if (res.ok) {
-        location.reload();
+        // do something
       }
     } catch {}
   };
