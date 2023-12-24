@@ -28,9 +28,12 @@ const page = async () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-center text-3xl font-bold text-ceos-2 mb-8">
+      <h1 className="text-center text-3xl font-bold text-ceos-2">
         파트장 투표결과
       </h1>
+      <h3 className="text-center mb-8 text-[#707070]">
+        [5위까지만 표시됩니다.]
+      </h3>
       <div className="">
         {candidates
           .sort()
