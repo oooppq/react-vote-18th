@@ -24,7 +24,7 @@ const Home = async () => {
             </>
           </VoteBanner>
           <HoveringLink
-            to={userInfo?.isPartDone ? '/result' : '/vote'}
+            to={userInfo?.isPartDone ? '/partvote/result' : '/partvote'}
             buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
           >
             {userInfo?.isPartDone ? '결과보기' : '투표하기'}
@@ -38,7 +38,7 @@ const Home = async () => {
             </>
           </VoteBanner>
           <HoveringLink
-            to={userInfo?.isPartDone ? '/result' : '/vote'}
+            to={userInfo?.isPartDone ? '/demovote/result' : '/demovote'}
             buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
           >
             {userInfo?.isDemoDone ? '결과보기' : '투표하기'}

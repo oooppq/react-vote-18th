@@ -4,10 +4,14 @@ export async function POST(request: Request) {
   const clientReqHeaders = request.headers;
 
   const serverReqHeaders = new Headers();
-  serverReqHeaders.set('Authorization', clientReqHeaders.get('Authorization')!);
-  const res = await fetch(`${process.env.SERVER_URL}/uesrs/logout`, {
-    headers: serverReqHeaders,
-  });
+  serverReqHeaders.set('AUTHORIZATION', clientReqHeaders.get('AUTHORIZATION')!);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/uesrs/logout`,
+     {
+      method: 'POST',
+      headers: serverReqHeaders,
+  }
+  );
 
   if (res.ok) {
     cookies().delete('user_info');
