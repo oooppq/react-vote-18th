@@ -155,20 +155,28 @@ export const useJoinHandler = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (
-      wrongNameFlag ||
-      wrongIdFlag ||
-      duplicateIdFlag ||
-      wrongPwFlag ||
-      differentPwFlag ||
-      wrongEmailFlag ||
-      duplicateEmailFlag
-    )
-      return;
     if (!event.currentTarget.part.value || !event.currentTarget.team.value) {
       setNotSelectedFlag(true);
       return;
-    }
+    } else setNotSelectedFlag(false);
+
+    if (
+      wrongNameFlag === undefined ||
+      wrongNameFlag ||
+      wrongIdFlag === undefined ||
+      wrongIdFlag ||
+      duplicateIdFlag === undefined ||
+      duplicateIdFlag ||
+      wrongPwFlag === undefined ||
+      wrongPwFlag ||
+      differentPwFlag === undefined ||
+      differentPwFlag ||
+      wrongEmailFlag === undefined ||
+      wrongEmailFlag ||
+      duplicateEmailFlag === undefined ||
+      duplicateEmailFlag
+    )
+      return;
 
     const payload = {
       name: event.currentTarget.username.value,
