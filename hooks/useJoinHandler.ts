@@ -88,7 +88,7 @@ export const useJoinHandler = () => {
 
   const handleChangeId = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
-    if (/[a-z0-9]{6,20}$/g.test(str)) {
+    if (/^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,20}$/.test(str)) {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/users/loginId`,
         {
