@@ -1,9 +1,9 @@
-import { getSession } from '@/utils/auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const userInfo = await getSession();
+  const stored = request.cookies.get('user_info');
+  const userInfo = stored ? JSON.parse(stored.value) : null;
 
   if (userInfo && request.nextUrl.pathname === '/join')
     return NextResponse.redirect(new URL('/', request.url));
@@ -11,6 +11,12 @@ export async function middleware(request: NextRequest) {
   if (!userInfo) {
     if (request.nextUrl.pathname === '/join') return;
     return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  if (userInfo.expTime < new Date().getTime()) {
+    const response = NextResponse.redirect(new URL('/login', request.url));
+    response.cookies.delete('user_info');
+    return response;
   }
 
   if (userInfo.candidateVoted && request.nextUrl.pathname === '/partvote')

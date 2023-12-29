@@ -1,3 +1,5 @@
+'use server';
+
 import { TUserInfo } from '@/types';
 import { cookies } from 'next/headers';
 
@@ -9,7 +11,7 @@ export const getSession = async () => {
   }
   const userInfo: TUserInfo = JSON.parse(stored.value);
   if (userInfo.expTime < new Date().getTime()) {
-    cookieStore.delete('user_info');
+    // cookieStore.delete('user_info');
     return null;
   }
   return userInfo;

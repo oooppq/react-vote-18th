@@ -1,9 +1,7 @@
-import HoveringButton from '@/components/common/HoveringButton';
 import HoveringLink from '@/components/common/HoveringLink';
 import VoteBanner from '@/components/home/VoteBanner';
 import { TUserInfo } from '@/types';
 import { getSession } from '@/utils/auth';
-import { useRouter } from 'next/navigation';
 
 const Home = async () => {
   const userInfo: TUserInfo | null = await getSession();
